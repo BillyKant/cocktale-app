@@ -57,6 +57,8 @@ def signin():
 
     return render_template('signin.html', form=form)
 
+
+
 # @auth.route('/logout')
 # @login_required
 # def logout():

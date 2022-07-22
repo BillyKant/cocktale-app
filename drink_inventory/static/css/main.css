@@ -54,3 +54,7 @@ width: 110px;
 background: blue;
 
 }
+
+.hidden{
+    display: none;
+}
