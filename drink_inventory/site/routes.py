@@ -45,6 +45,11 @@ def profile():
         drinks = Drink.query.filter_by(user_token = owner).all()
         response = drinks_schema.dump(drinks)
         print(response)
-        print(response[0]['name'])
+        if response:
+            print(response[0]['name'])
+            for drink in response:
+                print(drink['name'])
+        else:
+            print('No data')
 
         return render_template('profile.html')

@@ -2,8 +2,8 @@
 
 {% block content %}
 
-<header class="hero-section">
-    <h3 class="header-text">Welcome to Dino Park API {{ current_user.first_name }}!</h3>
+<header class="hero-section text-center">
+    <h3 class="header-text text-white">Welcome {{ current_user.first_name }}!</h3>
 </header>
 
 <div class="container">
@@ -16,6 +16,7 @@
     </ul>
 </div>
 
+{% if response %}
 <div class="row d-flex justify-content-center ">
     {% for drink in response %}
     <div class="card m-5" style="width: 18rem;">
@@ -44,5 +45,8 @@
     </div>
     {% endfor %}
 </div>
+{% else %}
+    <p style="color:white"></p>
+{% endif %}
 
 {% endblock content %}
