@@ -16,4 +16,33 @@
     </ul>
 </div>
 
+<div class="row d-flex justify-content-center ">
+    {% for drink in response %}
+    <div class="card m-5" style="width: 18rem;">
+        <img src="{{ drink['image'] }}" class="card-img-top my-2" alt="{{ drink['name'] }}">
+        <div class="card-body">
+            <h5 class="card-title">{{ drink['name'] }}</h5>
+            <p class="card-text">{{ drink['instructions'] }}</p>
+        </div>
+        <h6><strong></strong>Ingredients</strong></h6>
+        <ul class="list-group list-group-flush">
+            {% for i in range(1,16) %}
+            {% if drink['ingredient' + i|string] %} 
+                {% if drink['measure' + i|string] %}
+                <li class="list-group-item">{{ drink['ingredient' + i|string] }}, {{ drink['measure' + i|string] }}</li>
+                {% else %}
+                <li class="list-group-item">{{ drink['ingredient' + i|string] }}</li>
+                {% endif %}
+                {% endif %}
+            
+            {% endfor %}
+        </ul>
+        <div class="card-body text-center">
+            {% include 'addform.html' %}
+
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
 {% endblock content %}
