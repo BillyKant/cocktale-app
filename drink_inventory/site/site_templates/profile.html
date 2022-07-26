@@ -6,16 +6,6 @@
     <h3 class="header-text text-white">Welcome {{ current_user.first_name }}!</h3>
 </header>
 
-<div class="container">
-    <h3>Here are your profile details!</h3>
-    <ul class="list-group">
-        <li class="list-group-item">Email: {{ current_user.email }}</li>
-        <li class="list-group-item">Token: {{ current_user.token }}</li>
-
-        <!-- Add access key, plug in user email from database -->
-    </ul>
-</div>
-
 {% if response %}
 <div class="row d-flex justify-content-center ">
     {% for drink in response %}
@@ -28,8 +18,8 @@
         <h6><strong></strong>Ingredients</strong></h6>
         <ul class="list-group list-group-flush">
             {% for i in range(1,16) %}
-            {% if drink['ingredient' + i|string] %} 
-                {% if drink['measure' + i|string] %}
+            {% if drink['ingredient' + i|string] != 'None' %} 
+                {% if drink['measure' + i|string] != 'None' %}
                 <li class="list-group-item">{{ drink['ingredient' + i|string] }}, {{ drink['measure' + i|string] }}</li>
                 {% else %}
                 <li class="list-group-item">{{ drink['ingredient' + i|string] }}</li>
@@ -39,14 +29,14 @@
             {% endfor %}
         </ul>
         <div class="card-body text-center">
-            {% include 'addform.html' %}
+            <button class="btn btn-outline-danger mx-2" type="submit" >Delete</button>
 
         </div>
     </div>
     {% endfor %}
 </div>
 {% else %}
-    <p style="color:white"></p>
+    <p class="text-center mt-5"style="color:white">You have no saved drinks.</p>
 {% endif %}
 
 {% endblock content %}

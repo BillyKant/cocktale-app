@@ -81,27 +81,12 @@ def create_my_drink():
         my_drink = Drink(name, instructions, image, ingredient1, measure1, ingredient2, measure2, ingredient3, measure3, ingredient4, measure4, ingredient5, measure5, ingredient6, measure6, ingredient7, measure7, ingredient8, measure8, ingredient9, measure9, ingredient10, measure10, ingredient11, measure11, ingredient12, measure12, ingredient13, measure13, ingredient14, measure14, ingredient15, measure15, user_token = user_token)
 
         drinks_db = Drink.query.all()
-        # for drink in drinks_db:
-        #     print(f'db drink{drink.name}')
-        #     print(f'new drink{my_drink.name}')
-        #     if my_drink.name:
-        #         print('already exists')
-        #     else:
-        #         if my_drink.name:
-        #             db.session.add(my_drink)
-        #             db.session.commit()
-        
+
         if my_drink.name in drinks_db:
             print (f'{my_drink.name} already has already been added')
         elif my_drink.name:
             print(f'adding {my_drink.name}')
             db.session.add(my_drink)
             db.session.commit()
-
-
-        
-        # db.session.add(my_drink)
-        # db.session.commit()
-        # response = drink_schema.dump(my_drink)
 
         return my_drink

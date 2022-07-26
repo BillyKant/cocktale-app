@@ -25,7 +25,6 @@ def home():
         form = UserSearchForm1()
         form2= AddDrinkForm()
         drink = form.drink_name.data
-        print(drink)
         req = requests.get(f"https://www.thecocktaildb.com/api/json/v1/1/search.php?s={drink}")
         data = json.loads(req.content)
         
@@ -41,15 +40,11 @@ def home():
 @site.route('/profile', methods=['GET', 'POST'])
 def profile():
         owner = current_user.token
-        print(owner)
         drinks = Drink.query.filter_by(user_token = owner).all()
         response = drinks_schema.dump(drinks)
-        print(response)
         if response:
             print(response[0]['name'])
             for drink in response:
                 print(drink['name'])
-        else:
-            print('No data')
 
-        return render_template('profile.html')
+        return render_template('profile.html', response=response)
