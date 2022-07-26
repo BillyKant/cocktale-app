@@ -5,7 +5,7 @@ from flask import request, jsonify, json
 from flask_login import current_user
 
 from drink_inventory.models import Drink, User
-from drink_inventory.forms import AddDrinkForm
+from drink_inventory.forms import AddDrinkForm, DeleteDrinkForm
 from drink_inventory.models import db, User, Drink, drink_schema, drinks_schema
 
 import decimal
@@ -41,6 +41,8 @@ class JSONEncoder(json.JSONEncoder):
             return str(obj)
         return super(JSONEncoder, self).default(obj)
 
+
+# Allows users to add drinks to their profile by clicking button
 def create_my_drink():
         form2= AddDrinkForm()
         name = form2.name.data
@@ -90,3 +92,14 @@ def create_my_drink():
             db.session.commit()
 
         return my_drink
+
+def delete_my_drink():
+    form = DeleteDrinkForm()
+    id = form.id.data
+    print(id)
+    drink = Drink.query.get(id)
+    print(drink)
+    db.session.delete(drink)
+    db.session.commit()
+    # response = drink_schema.dump(drink)
+    return drink

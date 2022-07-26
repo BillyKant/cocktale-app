@@ -54,3 +54,7 @@ class AddDrinkForm(FlaskForm):
     ingredient15 = StringField('ingredient15', validators=[DataRequired()])  
     measure15 = StringField('measure15', validators=[DataRequired()]) 
     submit_button = SubmitField()
+
+class DeleteDrinkForm(FlaskForm):
+    id = StringField('id', validators=[DataRequired()])  
+    submit_button = SubmitField()

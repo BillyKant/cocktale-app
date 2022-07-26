@@ -1,0 +1,9 @@
+<form method="post">
+    <div>
+        <fieldset class="hidden">
+            {{ form.id(class= "form-control", value = drink['id']) }}
+        </fieldset>
+    </div>
+    
+    {{ form.submit_button(class="btn btn-outline-danger btn-block", value="Delete") }}
+</form>

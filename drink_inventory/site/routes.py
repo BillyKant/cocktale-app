@@ -1,14 +1,13 @@
 from venv import create
-from flask import Blueprint, jsonify, redirect, render_template, url_for
+from flask import Blueprint, jsonify, redirect, render_template, url_for, request
 from flask_login import current_user, AnonymousUserMixin
 
 
 import requests
 import json
 
-from drink_inventory.forms import UserSearchForm1, AddDrinkForm
-# from drink_inventory.api.routes import create_drink
-from drink_inventory.helpers import token_required, create_my_drink
+from drink_inventory.forms import DeleteDrinkForm, UserSearchForm1, AddDrinkForm
+from drink_inventory.helpers import delete_my_drink, token_required, create_my_drink, delete_my_drink
 from drink_inventory.models import db, User, Drink, drink_schema, drinks_schema
 
 site = Blueprint('site', __name__, template_folder='site_templates')
@@ -28,7 +27,7 @@ def home():
         req = requests.get(f"https://www.thecocktaildb.com/api/json/v1/1/search.php?s={drink}")
         data = json.loads(req.content)
         
-        # Add Drink Form Code   
+        # Add Drink Form Helper   
         create_my_drink()      
 
         return render_template('index.html', data=data['drinks'], form=form, form2=form2)
@@ -39,6 +38,10 @@ def home():
 # PROFILE PAGE ROUTE
 @site.route('/profile', methods=['GET', 'POST'])
 def profile():
+        form = DeleteDrinkForm()
+        
+        if request.method == 'POST':
+            delete_my_drink()
         owner = current_user.token
         drinks = Drink.query.filter_by(user_token = owner).all()
         response = drinks_schema.dump(drinks)
@@ -47,4 +50,7 @@ def profile():
             for drink in response:
                 print(drink['name'])
 
-        return render_template('profile.html', response=response)
+
+        return render_template('profile.html', response=response, form=form)
+
+
