@@ -26,20 +26,29 @@ def home():
         req = requests.get(f"https://www.thecocktaildb.com/api/json/v1/1/search.php?s={drink}")
         data = json.loads(req.content)
 
+        form2 = AddDrinkForm()
+        create_my_drink() 
+
+
 
         # Get a Random drink
         form4 = UserSearchForm3()
         rand_drink = form4.random.data
         print(rand_drink)
-        req4 = requests.get(f"https://www.thecocktaildb.com/api/json/v1/1/{rand_drink}.php")
-        print(req4)
-        # data4 = json.loads(req4.content)
-        # print(data4)
+        data4 = None
+        if rand_drink:
+            req4 = requests.get(f"https://www.thecocktaildb.com/api/json/v1/1/{rand_drink}.php")
+            print(req4)
+            data4 = json.loads(req4.content)
+            data4 = data4['drinks']
+            print(data4)
         
 
-        # Add drink  
+        # Add drink 
+
         form2 = AddDrinkForm()
-        create_my_drink()      
+        create_my_drink()  
+    
 
 
         # form3 = UserSearchForm2()
@@ -50,13 +59,13 @@ def home():
         # drinks = data2['drinks']
         # for each in drinks:
         #     print(each['idDrink'])
-        #     req3 = requests.get(f"https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i={each}")
+        #     req3 = requests.get(f"https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i={each['idDrink']}")
         #     data3 = json.loads(req3.content)
         #     print(data3)
 
         
 
-        return render_template('index.html', data=data['drinks'], form=form, form2=form2, form4=form4)
+        return render_template('index.html', data=data['drinks'], data4=data4, form=form, form2=form2, form4=form4)
 
     else:
         return redirect(url_for('auth.signin'))
