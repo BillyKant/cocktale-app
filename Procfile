@@ -1,0 +1,1 @@
+web: gunicorn drink_inventory:app --preload

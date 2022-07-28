@@ -19,6 +19,14 @@ class UserSearchForm1(FlaskForm):
     drink_name = StringField('drink', validators=[DataRequired()])
     submit_button = SubmitField()
 
+class UserSearchForm2(FlaskForm):
+    ingredient_name = StringField('ingredient', validators=[DataRequired()])
+    submit_button = SubmitField()
+
+class UserSearchForm3(FlaskForm):
+    random = StringField('random', validators=[DataRequired()])
+    submit_button = SubmitField()
+
 class AddDrinkForm(FlaskForm):
     name = StringField('name', validators=[DataRequired()])  
     instructions = StringField('instructions', validators=[DataRequired()]) 

@@ -1,0 +1,13 @@
+<form method="post">
+    <div class="container">
+        <div class="row height d-flex justify-content-center align-items-center">
+            <div class="hidden">
+                {{ form4.random.label }}
+                {{ form4.random(class= "form-control", value = "random") }}
+            </div> 
+            <div class="col-md mt-2">
+                {{ form4.submit_button(class="btn btn-outline-danger btn-block", value="Random") }}
+            </div>
+        </div>
+    </div>
+</form>
