@@ -26,8 +26,8 @@ def home():
         req = requests.get(f"https://www.thecocktaildb.com/api/json/v1/1/search.php?s={drink}")
         data = json.loads(req.content)
 
-        form2 = AddDrinkForm()
-        create_my_drink() 
+        # form2 = AddDrinkForm()
+        # create_my_drink() 
 
 
 
